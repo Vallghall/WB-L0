@@ -1,0 +1,11 @@
+#form {
+    display: block;
+    margin: auto;
+}
+
+#msg-view {
+    margin: 10pt auto;
+    text-align: center;
+    font-family: "Times New Roman", sans-serif;
+    font-size: 12pt;
+}
