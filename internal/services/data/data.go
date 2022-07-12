@@ -17,13 +17,21 @@ func New(s *storage.Storage) *Service {
 
 func (s *Service) CashMessage(data []byte) {
 	var msg nats.Message
-	json.Unmarshal(data, &msg)
+	if err := json.Unmarshal(data, &msg); err != nil {
+		log.Printf("message parsing failed: %v", err)
+		return
+	}
+
 	s.storage.InMemoryStorage.Store(msg.OrderUID, &msg)
 }
 
 func (s *Service) PersistMessage(data []byte) {
 	var msg nats.Message
-	json.Unmarshal(data, &msg)
+	if err := json.Unmarshal(data, &msg); err != nil {
+		log.Printf("message parsing failed: %v", err)
+		return
+	}
+
 	s.storage.PersistentStorage.Store(msg.OrderUID, &msg)
 }
 
